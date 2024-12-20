@@ -16,16 +16,12 @@ with open('vectorizer.pkl', 'rb') as file:
 model = load_model('email_classification_model.h5')
 
 
-# 2. Hàm xử lý để phân loại email
 def classify_email(email_text):
-    # Tiền xử lý: Chuyển văn bản thành vector TF-IDF
     email_vector = vectorizer.transform([email_text]).toarray()
 
-    # Dự đoán bằng mô hình
     prediction = model.predict(email_vector)
 
-    # Gán nhãn dựa trên ngưỡng 0.5
-    label = 'Spam' if prediction[0][0] > 0.5 else 'Ham'
+    label = 'Spam' if prediction[0][0] > 0.5 else 'Binh Thuong'
 
     return {'email': email_text, 'label': label, 'probability': float(prediction[0][0])}
 
