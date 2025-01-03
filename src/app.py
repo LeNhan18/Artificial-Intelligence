@@ -18,13 +18,10 @@ with open("tfidf_vectorizer.pkl", "wb") as f:
 
 print("Đã lưu tfidf_vectorizer.pkl thành công!")
 # Tạo Flask app
-app = Flask(__name__)
+from flask_cors import CORS
 from flask import Flask, request, jsonify
-
 app = Flask(__name__)
-
-
-
+CORS(app)
 @app.route("/")
 def index():
     return render_template("index.html")
