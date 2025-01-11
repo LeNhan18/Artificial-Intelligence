@@ -30,7 +30,7 @@ textarea {
 
 button {
     background-color: #007bff;
-    color: white;
+    color: #ab0808;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -39,7 +39,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #2a69b4;
 }
 
 #error, #result {

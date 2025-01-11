@@ -1,12 +1,12 @@
 # Danh sách thư mục chứa email rác (spam)
 spam_folders = [
-    "C:\\Users\\Admin\\Downloads\\spam_2",
+    "C:\\Users\\Admin\\Downloads\\spam_2\\spam_2",
 
 ]
 
 # Danh sách thư mục chứa email thường (ham)
 ham_folders = [
-    "C:\\Users\\Admin\\Downloads\\easy_ham",
+    "C:\\Users\\Admin\\Downloads\\easy_ham\\easy_ham",
 
 ]
 import os
@@ -16,14 +16,12 @@ mail_data = []  # list để lưu (nội_dung, nhãn)
 
 # Đọc thư mục SPAM
 for folder_path in spam_folders:
-    # Lấy danh sách file .txt/.eml trong thư mục
     spam_files = glob.glob(os.path.join(folder_path, "*"))
 
     for fname in spam_files:
         try:
             with open(fname, "r", encoding="latin-1") as f:
                 content = f.read()
-            # Thêm vào list mail_data, label=1 (spam)
             mail_data.append((content, 1))
         except:
             pass  # nếu file bị lỗi đọc thì bỏ qua
@@ -78,4 +76,3 @@ print(df['label'].value_counts())
 # Chia dữ liệu thành X và y
 X = df['text']
 y = df['label']
-

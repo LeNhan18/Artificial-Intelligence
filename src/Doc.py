@@ -12,8 +12,8 @@ from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 
 # Đọc dữ liệu từ các thư mục
-spam_folders = ["C:\\Users\\Admin\\Downloads\\spam_2"]
-ham_folders = ["C:\\Users\\Admin\\Downloads\\easy_ham"]
+spam_folders = ["C:\\Users\\Admin\\Downloads\\spam_2\\spam_2"]
+ham_folders = ["C:\\Users\\Admin\\Downloads\\easy_ham\\easy_ham"]
 
 mail_data = []
 for folder_path in spam_folders:
@@ -54,20 +54,23 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 smote = SMOTE(random_state=42)
 X_train_res, y_train_res = smote.fit_resample(X_train, y_train)
 print("Dữ liệu sau SMOTE:", X_train_res.shape, y_train_res.shape)
+print("Phân phối sau SMOTE:")
+print(pd.Series(y_train_res).value_counts())
 
 # Xây dựng mô hình mạng nơ-ron
 model = Sequential([
-    Dense(256, input_shape=(X_train_res.shape[1],), activation='relu'),
+    Dense(512, input_shape=(X_train_res.shape[1],), activation='relu'),
+    Dropout(0.5),
+    Dense(256, activation='relu'),
     Dropout(0.5),
     Dense(128, activation='relu'),
-    Dropout(0.5),
     Dense(1, activation='sigmoid')
 ])
 
 # Biên dịch mô hình
 model.compile(
     loss='binary_crossentropy',
-    optimizer=Adam(learning_rate=0.001),
+    optimizer=Adam(learning_rate=0.0001),
     metrics=['accuracy']
 )
 
@@ -85,7 +88,7 @@ print(classification_report(y_test, y_pred))
 print(confusion_matrix(y_test, y_pred))
 from tensorflow.keras.callbacks import EarlyStopping
 
-early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
+early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
 history = model.fit(
     X_train_res, y_train_res,
