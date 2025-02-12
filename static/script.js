@@ -11,7 +11,7 @@ document.getElementById("email-form").addEventListener("submit", async function 
   try {
     // Gửi yêu cầu POST đến API Flask
     const response = await fetch("http://127.0.0.1:5000/nhanle", {
-      method: "POST",
+      method: "POST"
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email }),
     });
