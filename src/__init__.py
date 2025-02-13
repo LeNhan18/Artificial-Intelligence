@@ -76,3 +76,4 @@ print(df['label'].value_counts())
 # Chia dữ liệu thành X và y
 X = df['text']
 y = df['label']
+

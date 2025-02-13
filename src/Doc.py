@@ -14,7 +14,6 @@ from tensorflow.keras.optimizers import Adam
 # Đọc dữ liệu từ các thư mục
 spam_folders = ["C:\\Users\\Admin\\Downloads\\spam_2\\spam_2"]
 ham_folders = ["C:\\Users\\Admin\\Downloads\\easy_ham\\easy_ham"]
-
 mail_data = []
 for folder_path in spam_folders:
     spam_files = glob.glob(os.path.join(folder_path, "*"))
@@ -35,7 +34,6 @@ for folder_path in ham_folders:
             mail_data.append((content, 0))
         except Exception as e:
             print(f"Lỗi khi đọc file {fname}: {e}")
-
 # Tạo DataFrame
 df = pd.DataFrame(mail_data, columns=["text", "label"])
 print(df['label'].value_counts())
@@ -67,6 +65,15 @@ model = Sequential([
     Dense(1, activation='sigmoid')
 ])
 
+
+ model =Sequential([
+     Dense(512, input_shape=(X_train_res.shape[1],), activation='relu'),
+     Dropout(0.5),
+     Dense(256, activation='relu'),
+     Dropout(0.5),
+     Dense(128, activation='relu'),
+     Dense(1, activation='sigmoid')
+ ])
 # Biên dịch mô hình
 model.compile(
     loss='binary_crossentropy',
