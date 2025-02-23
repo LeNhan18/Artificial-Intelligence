@@ -19,10 +19,8 @@ document.getElementById("email-form").addEventListener("submit", async function 
     if (!response.ok) {
       throw new Error(`Lỗi HTTP: ${response.status}`);
     }
-
     // Nhận dữ liệu JSON từ phản hồi
     const data = await response.json();
-
     if (data["Ket Qua dự đoán"]) {
       // Hiển thị kết quả dự đoán
       const label = data["Ket Qua dự đoán"] === "spam" ? "Thư rác" : "Thư thường";

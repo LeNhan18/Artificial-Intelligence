@@ -66,14 +66,6 @@ model = Sequential([
 ])
 
 
- model =Sequential([
-     Dense(512, input_shape=(X_train_res.shape[1],), activation='relu'),
-     Dropout(0.5),
-     Dense(256, activation='relu'),
-     Dropout(0.5),
-     Dense(128, activation='relu'),
-     Dense(1, activation='sigmoid')
- ])
 # Biên dịch mô hình
 model.compile(
     loss='binary_crossentropy',
