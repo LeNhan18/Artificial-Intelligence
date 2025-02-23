@@ -11,7 +11,7 @@ document.getElementById("email-form").addEventListener("submit", async function 
   try {
     // Gửi yêu cầu POST đến API Flask
     const response = await fetch("http://127.0.0.1:5000/nhanle", {
-      method: "POST"
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email }),
     });
@@ -19,20 +19,18 @@ document.getElementById("email-form").addEventListener("submit", async function 
     if (!response.ok) {
       throw new Error(`Lỗi HTTP: ${response.status}`);
     }
+
     // Nhận dữ liệu JSON từ phản hồi
     const data = await response.json();
     if (data["Ket Qua dự đoán"]) {
       // Hiển thị kết quả dự đoán
       const label = data["Ket Qua dự đoán"] === "spam" ? "Thư rác" : "Thư thường";
-      document.getElementById("result").innerHTML =
-        `<span>Kết quả: ${label}</span>`;
+      document.getElementById("result").innerHTML = `<span>Kết quả: ${label}</span>`;
     } else if (data.error) {
       // Hiển thị lỗi từ server nếu có
-      document.getElementById("result").innerHTML =
-        `<span class="error">${data.error}</span>`;
+      document.getElementById("result").innerHTML = `<span class="error">${data.error}</span>`;
     } else {
-      document.getElementById("result").innerHTML =
-        '<span class="error">Kết quả không xác định!</span>';
+      document.getElementById("result").innerHTML = '<span class="error">Kết quả không xác định!</span>';
     }
   } catch (error) {
     console.error(error);
