@@ -53,8 +53,6 @@ model.fit(X_train, y_train, epochs=30, validation_data=(X_test, y_test), callbac
 
 # 5. Lưu mô hình
 model.save("face_recognition_model.h5")
-
-
 # 6. Triển khai nhận diện khuôn mặt
 def recognize_face(image_path):
     if not os.path.exists(image_path):

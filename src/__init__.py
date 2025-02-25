@@ -71,6 +71,7 @@ df.dropna(subset=['text', 'label'], inplace=True)
 
 print("Số lượng email sau khi loại bỏ giá trị thiếu:", df.shape[0])
 print(df['label'].value_counts())
+print("Hãy nhập số luongj email của bạn")
 
 
 # Chia dữ liệu thành X và y
